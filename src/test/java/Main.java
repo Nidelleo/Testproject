@@ -1,3 +1,4 @@
+import com.codeborne.selenide.CollectionCondition;
 import org.apache.commons.lang3.builder.ToStringExclude;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
@@ -14,8 +15,6 @@ public class Main {
     @Test
     public void OpenDodoandFoundPizza ()
     {
-        //знаю, что здесь лучше обратиться к атрибуту, но не могу понять как правильно прописать синтаксис
-
         open("https://dodopizza.ru/krasnoyarsk");
             $("body").shouldHave(text("Песто"));
     }
@@ -28,5 +27,12 @@ public class Main {
         open("https://dodopizza.ru/krasnoyarsk/loyaltyprogram");
         $("button[data-type='tertiary']").click();
         $(By.id("phn-input")).setValue("9029676065").pressEnter();
+    }
+
+    @Test
+    public void InHeader10Links ()
+    {
+        open("https://dodopizza.ru/krasnoyarsk");
+        $$(".ymp2tw-1.egnRch li.ymp2tw-2.gWaecf").shouldHave(CollectionCondition.size(10));
     }
 }
